@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Prediction</h2>
+            <hr />
+            <form id="predict-form">
+                <div class="form-group">
+                    <label for="input_1">Input 1</label>
+                    <input type="text" class="form-control" id="input_1" name="input_1" />
+                </div>
+                <div class="form-group">
+                    <label for="input_2">Input 2</label>
+                    <input type="text" class="form-control" id="input_2" name="input_2" />
+                </div>
+                <div class="form-group">
+                    <label for="input_3">Input 3</label>
+                    <input type="text" class="form-control" id="input_3" name="input_3" />
+                </div>
+                <div class="form-group">
+                    <label for="input_4">Input 4</label>
+                    <input type="text" class="form-control" id="input_4" name="input_4" />
+                </div>
+                <div class="form-group">
+                    <label for="input_5">Input 5</label>
+                    <input type="text" class="form-control" id="input_5" name="input_5" />
+                </div>
+                <div class="form-group">
+                    <label for="input_6">Input 6</label>
+                    <input type="text" class="form-control" id="input_6" name="input_6" />
+                </div>
+                <div class="form-group">
+                    <label for="input_7">Input 7</label>
+                    <input type="text" class="form-control" id="input_7" name="input_7" />
+                </div>
+                <div class="form-group">
+                    <label for="input_8">Input 8</label>
+                    <input type="text" class="form-control" id="input_8" name="input_8" />
+                </div>
+                <div class="form-group">
+                    <label for="input_9">Input 9</label>
+                    <input type="text" class="form-control" id="input_9" name="input_9" />
+                </div>
+                <div class="form-group">
+                    <label for="input_10">Input 10</label>
+                    <input type="text" class="form-control" id="input_10" name="input_10" />
+                </div>
+                <div class="form-group">
+                    <label for="input_11">Input 11</label>
+                    <input type="text" class="form-control" id="input_11" name="input_11" />
+                </div>
+                <div class="form-group">
+                    <label for="input_12">Input 12</label>
+                    <input type="text" class="form-control" id="input_12" name="input_12" />
+                </div>
+                <div class="form-group">
+                    <label for="input_13">Input 13</label>
+                    <input type="text" class="form-control" id="input_13" name="input_13" />
+                </div>
+                <div class="form-group">
+                    <label for="input_14">Input 14</label>
+                    <input type="text" class="form-control" id="input_14" name="input_14" />
+                </div>
+                <div class="form-group">
+                    <label for="input_15">Input 15</label>
+                    <input type="text" class="form-control" id="input_15" name="input_15" />
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+            <hr />
+            <h4 class="text-center">Prediction Result: <span id="prediction-result"></span></h4>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function () {
+            $('#predict-form').submit(function (e) {
+                e.preventDefault();
+
+                // Get the input values
+                var input_1 = parseFloat($('#input_1').val());
+                var input_2 = parseFloat($('#input_2').val());
+                var input_3 = parseFloat($('#input_3').val());
+                var input_4 = parseFloat($('#input_4').val());
+                var input_5 = parseFloat($('#input_5').val());
+                var input_6 = parseFloat($('#input_6').val());
+                var input_7 = parseFloat($('#input_7').val());
+                var input_8 = parseFloat($('#input_8').val());
+                var input_9 = parseFloat($('#input_9').val());
+                var input_10 = parseFloat($('#input_10').val());
+                var input_11 = parseFloat($('#input_11').val());
+                var input_12 = parseFloat($('#input_12').val());
+                var input_13 = parseFloat($('#input_13').val());
+                var input_14 = parseFloat($('#input_14').val());
+                var input_15 = parseFloat($('#input_15').val());
+
+                // Send the POST request to the API endpoint
+                $.ajax({
+                    url: '/api/model/predict',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        input_1: input_1,
+                        input_2: input_2,
+                        input_3: input_3,
+                        input_4: input_4,
+                        input_5: input_5,
+                        input_6: input_6,
+                        input_7: input_7,
+                        input_8: input_8,
+                        input_9: input_9,
+                        input_10: input_10,
+                        input_11: input_11,
+                        input_12: input_12,
+                        input_13: input_13,
+                        input_14: input_14,
+                        input_15: input_15
+                    }),
+                    success: function (response) {
+                        // Update the prediction result on the webpage
+                        $('#prediction-result').text(response.prediction);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+                });
+            });
+    </script>
+}
